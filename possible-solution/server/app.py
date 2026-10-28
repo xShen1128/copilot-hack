@@ -77,16 +77,11 @@ def predict():
     if airport_id not in known_airport_ids:
         return jsonify({"error": f"airport_id {airport_id} was not found in airports.csv"}), 400
 
-    prediction = model.predict_proba([[day_of_week, airport_id]])[0]
-    
-    # Split prediction string by space
-    prediction = str(prediction).split(' ')
+    probabilities = model.predict_proba([[day_of_week, airport_id]])[0]
 
-    # store first value from prediction as certainty, and remove the first character
-    certainty = float(prediction[0][2:])
-
-    # store second value from prediction as delay, and remove the last character
-    delay = float(prediction[1][:-1])
+    # classes_ is [0, 1], so index 0 is the certainty and index 1 is the delay
+    certainty = float(probabilities[0])
+    delay = float(probabilities[1])
 
     # return prediction as json
     return jsonify({'certainty': certainty, 'delay': delay})

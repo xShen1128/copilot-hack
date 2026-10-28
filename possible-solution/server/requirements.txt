@@ -1,9 +1,12 @@
 flask
-pandas
 
 # model.pkl is a pickled scikit-learn estimator. The pickle records the version
 # it was created with (_sklearn_version = 1.2.2), so pin that version to keep the
 # deserialized attributes consistent with what the estimator expects.
+# scikit-learn 1.2.2 ships C extensions built against numpy 1.x; under numpy 2.x
+# they fail to import with "numpy.dtype size changed, may indicate binary
+# incompatibility", so numpy is held below 2.
 # NOTE: scikit-learn 1.2.2 publishes wheels only for CPython 3.8-3.11, so this
 # server needs Python 3.11 or older.
 scikit-learn==1.2.2
+numpy<2
