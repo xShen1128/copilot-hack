@@ -8,5 +8,5 @@ flask
 # incompatibility", so numpy is held below 2.
 # NOTE: scikit-learn 1.2.2 publishes wheels only for CPython 3.8-3.11, so this
 # server needs Python 3.11 or older.
-scikit-learn==1.2.2
+scikit-learn==1.5.0
 numpy<2
